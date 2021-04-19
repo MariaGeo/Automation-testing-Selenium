@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>homework3and4-Selenium</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>pravim-source-za-main-papkata</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <executions>
+                    <execution>
+                        <id>pravim-javadoc</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <!-- for parallel execution - configuration-->
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <suiteXmlFiles>
+                        <file>src/test/resources/suite-shop.xml</file>
+                        <file>src/test/resources/suite-confYourCar.xml</file>
+                    </suiteXmlFiles>
+                     <properties>
+                         <property>
+                             <name>suitethreadpoolsize</name>
+                             <value>2</value>
+                         </property>
+                     </properties>
+
+                    <!--IMPORTANT!!! The configurations below are associated with parallel execution on test/method level unlike the configs above which
+                   are on suite/class (if one suite is one class ofc) level. If you want to use the parallel on method level you have to uncomment the
+                   two lines below and comment the 6 lines property above....Just choose whatever parallel execution the automation that you are building
+                   requires :D -->
+                    <!--                 <parallel>methods</parallel>-->
+                    <!--                 <threadCount>10</threadCount>-->
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
